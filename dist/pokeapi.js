@@ -3,7 +3,13 @@ export class PokeAPI {
     constructor() { }
     async fetchLocations(pageURL) {
         // implement this
-        const response = await fetch(`${PokeAPI.baseURL}/location-area/?limit=20&offset=${pageURL ?? '0'}`);
+        const response = await fetch(pageURL ?? "");
+        return response.json();
+    }
+    async fetchPokemons(url) {
+        // implement this
+        const response = await fetch(url);
+        console.log(response);
         return response.json();
     }
     async fetchLocation(locationName) {

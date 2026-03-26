@@ -31,7 +31,7 @@ export function startREPL(state) {
             }
             let words = cleanInput(line);
             // console.log(`Your command was: ${words[0]}`);
-            await commands[words[0]]?.callback(state);
+            await commands[words[0]]?.callback(state, ...words);
             rl.prompt();
         });
     }

@@ -1,12 +1,19 @@
 
 export class PokeAPI {
-  private static readonly baseURL = "https://pokeapi.co/api/v2";
+  static readonly baseURL = "https://pokeapi.co/api/v2";
 
   constructor() {}
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
     // implement this
-    const response = await fetch(`${PokeAPI.baseURL}/location-area/?limit=20&offset=${pageURL ?? '0'}`);
+    const response = await fetch(pageURL ?? "");
+    return response.json();
+  }
+
+  async fetchPokemons(url: string): Promise<PokemonEncounters> {
+    // implement this
+    const response = await fetch(url);
+    //console.log(response);
     return response.json();
   }
 
@@ -30,6 +37,19 @@ export type Location = {
   name: string;
   url: string;
 };
+
+export interface Pokemon {
+  name: string
+  url: string
+}
+
+export interface Pokemon_Details{
+  pokemon: Pokemon
+  version_details: VersionDetail2[]
+}
+export type PokemonEncounters = {
+  pokemon_encounters: Pokemon_Details[]
+}
 
 export interface EncounterMethodRate {
   encounter_method: EncounterMethod
@@ -65,11 +85,6 @@ export interface Language {
 export interface PokemonEncounter {
   pokemon: Pokemon
   version_details: VersionDetail2[]
-}
-
-export interface Pokemon {
-  name: string
-  url: string
 }
 
 export interface VersionDetail2 {
